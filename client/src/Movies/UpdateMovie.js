@@ -24,7 +24,7 @@ export const UpdateMovie = (props) => {
       setMovie(movieToEdit);
     }
 
-  }, []);
+  }, [props.match.params.id, props.movies]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
