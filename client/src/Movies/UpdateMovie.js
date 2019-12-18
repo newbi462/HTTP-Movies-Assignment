@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from "axios";
 
 const movieObject = {
   id: "",
@@ -28,6 +29,18 @@ export const UpdateMovie = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // do my put to do the update
+    axios
+      .put(`http://localhost:5000/api/movies/${props.match.params.id}`, movie)
+      .then(responce => {
+        console.log(responce.data);
+
+        //remeber to update state so it will refresh
+        props.setUpdate(responce.data);
+
+        // redirect route to the ITEM PAGE on submit
+        props.history.push(`/movies`);
+      })
+      .catch(err => console.log(err));
   };
 
   const handleChange = (event) => {
@@ -41,7 +54,7 @@ export const UpdateMovie = (props) => {
 
   return (
     <>
-    {console.log(props)}
+    {console.log(movie)}
     <h2>Update This Move</h2>
       <form onSubmit={handleSubmit}>
         <input

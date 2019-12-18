@@ -15,6 +15,9 @@ const App = () => {
 
   //was told to refactor and re do the state tree
   const [movies, setMovies] = useState([]);
+  const [update, setUpdate] = useState("");
+
+
 
   useEffect(() => {
     axios
@@ -22,7 +25,7 @@ const App = () => {
       .then(res => setMovies(res.data))
       .catch(err => console.log(err.response));
 
-  }, []);
+  }, [update]);
 
 
 
@@ -55,6 +58,17 @@ const App = () => {
         path="/update-movie/:id"
         render={props => (
           <UpdateMovie {...props}
+            movies={movies}
+            setMovies={setMovies}
+            setUpdate={setUpdate}
+          />
+        )}
+      />
+
+      <Route
+        path="/movies"
+        render={props => (
+          <MovieList {...props}
             movies={movies}
             setMovies={setMovies} />
         )}
