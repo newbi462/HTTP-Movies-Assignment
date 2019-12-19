@@ -1,7 +1,36 @@
-import React, { Component } from "react";
-import axios from "axios";
+//import React, { Component } from "react";
+import React from "react";
+//import axios from "axios";
 import { Link } from "react-router-dom";
 import MovieCard from "./MovieCard";
+
+const MovieList = (props) => {
+  return (
+    <>
+    <div className="movie-list">
+      {props.movies.map(movie => (
+        <MovieDetails key={movie.id} movie={movie} />
+      ))}
+    </div>
+    </>
+  );
+};
+
+export default MovieList;
+
+
+function MovieDetails({ movie }) {
+  return (
+    <>
+    <Link to={`/movies/${movie.id}`}>
+      <MovieCard movie={movie} />
+    </Link>
+    </>
+  );
+}
+
+
+/* IF I AM RE FACTORING I AM FIXING THIS CLASS CRAP
 export default class MovieList extends Component {
   constructor(props) {
     super(props);
@@ -30,8 +59,13 @@ export default class MovieList extends Component {
 
 function MovieDetails({ movie }) {
   return (
+    <>
     <Link to={`/movies/${movie.id}`}>
       <MovieCard movie={movie} />
     </Link>
+
+
+    </>
   );
 }
+*/
